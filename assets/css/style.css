@@ -1,0 +1,97 @@
+/* Fonts */
+
+@font-face {
+    font-family: "Raleway ExtraBold";
+    src: url("../fonts/Raleway-ExtraBold.ttf");
+}
+
+@font-face {
+    font-family: "Raleway Bold";
+    src: url("../fonts/Raleway-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Raleway Medium";
+    src: url("../fonts/Raleway-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Raleway Regular";
+    src: url("../fonts/Raleway-Regular.ttf");
+}
+
+/*
+@font-face {
+    font-family: "Raleway";
+    src: url("../fonts/Raleway-.ttf");
+}
+*/
+
+/* Style */
+
+body{
+    background: url(../img/pattern.png);
+    color: #fff;
+    font-family: 'Raleway Regular', sans-serif;
+    overflow: hidden;
+}
+
+.project-list{
+    display: inline-flex;
+    flex-wrap: nowrap;
+    height: 100%;
+    align-items: center;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+.project{
+    background: #303030;
+    display: flex;
+    transform: scale(0.8);
+    transition: 0.3s;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.project-selected{
+    transform: scale(1);
+    opacity: 1;
+}
+
+.project > .project-title{
+    font-size: 3.4em;
+    color: #fff;
+    font-family: 'Raleway Bold';
+    align-self: center;
+    position: relative;
+    left: -80px;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.project-selected > .project-title{
+    opacity: 1;
+    transform: 0.3s;
+}
+
+.project-selected > .project-title::after{
+    content: attr(title);
+    color: #fff;
+    font-family: 'Raleway Regular';
+    font-size: 0.32em;
+    position: absolute;
+    left: 10px;
+    bottom: -25px;
+    opacity: 0.8;
+}
+
+.cursor-circle{
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    border: solid 3px #fff;
+    position: relative;
+    left: -25px;
+    top: -25px;
+}
