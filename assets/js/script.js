@@ -267,11 +267,6 @@ function dragProjects(event){
     });
 }
 
-// ************************************************************************** //
-
-// START EXPERIMENTAL
-
-
 function keyProject(event){
     var key = event.keyCode;
     
@@ -298,6 +293,13 @@ function keyProject(event){
 }
 
 window.addEventListener('keydown', keyProject);
+
+
+// ************************************************************************** //
+
+// START EXPERIMENTAL
+
+
 
 
 // END EXPERIMENTAL
