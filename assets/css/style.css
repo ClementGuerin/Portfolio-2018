@@ -51,7 +51,6 @@ body{
     transform: scale(0.8);
     transition: 0.3s;
     opacity: 0.5;
-    cursor: pointer;
 }
 
 .project-selected{
@@ -86,12 +85,41 @@ body{
     opacity: 0.8;
 }
 
-.cursor-circle{
-    height: 50px;
-    width: 50px;
-    border-radius: 100%;
-    border: solid 3px #fff;
-    position: relative;
-    left: -25px;
-    top: -25px;
+.follow-btn{
+    text-align: center;
+    transition: 0.2s;
 }
+
+.follow-btn-menu{
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    display: flex;
+    text-align: center;
+    margin: 20px;
+}
+
+.btn-menu{
+    align-self: center;
+    transition: 0.2s;
+}
+
+.btn-menu:hover > span{
+    background: #fff !important;
+    margin-bottom: 8px;
+}
+
+.btn-menu > span{
+    width: 26px;
+    height: 2px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 3px;
+    display: block;
+    margin-bottom: 5px;
+    transition: 0.2s;
+}
+
+.btn-menu > span:last-child{
+    margin-bottom: 0;
+}
+

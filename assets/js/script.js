@@ -11,6 +11,8 @@ var projectListWidth = document.querySelector('.project-list').offsetWidth;
 var noRepeat = false;
 var indexClick;
 var mouseDown, firstClick, lastClick, firstScroll, lastScroll, successScroll;
+var element;
+
 
 
 // Help functions
@@ -30,18 +32,18 @@ function mouseWheelDetection(e) {
         window.addEventListener('DOMMouseScroll', function (e) {
             mouseWheel = e.detail;
             if (mouseWheel < 0) {
-                previousProject();
+                previousProject(Event);
             } else {
-                nextProject();
+                nextProject(Event);
             }
         });
     } else {
         window.addEventListener('wheel', function (e) {
             mouseWheel = e.wheelDelta;
             if (mouseWheel > 0) {
-                previousProject();
+                previousProject(Event);
             } else if (mouseWheel < 0) {
-                nextProject();
+                nextProject(Event);
             }
         });
     }
@@ -85,7 +87,7 @@ function resizing() {
 
 // Projects display
 
-function previousProject() {
+function previousProject(Event) {
     if (noRepeat == false) {
         noRepeat = true; // Set NoRepeat
 
@@ -100,7 +102,7 @@ function previousProject() {
             });
 
             // Actions for each project
-            checkProject();
+            checkProject(Event);
         }
 
         // Timeout for reset NoRepeat
@@ -110,7 +112,7 @@ function previousProject() {
     }
 }
 
-function nextProject() {
+function nextProject(Event) {
     if (noRepeat == false) {
         noRepeat = true; // Set NoRepeat
 
@@ -125,7 +127,7 @@ function nextProject() {
             });
 
             // Actions for each project
-            checkProject();
+            checkProject(Event);
         }
 
         // Timeout for reset NoRepeat
@@ -135,7 +137,7 @@ function nextProject() {
     }
 }
 
-function checkProject() { // I know, it's bad :(
+function checkProject(Event) { // I know, it's bad :(
     if (projectSelected == 1) {
         projectS[0].classList.add('project-selected');
         projectS[1].classList.remove('project-selected');
@@ -174,7 +176,7 @@ function checkProject() { // I know, it's bad :(
     }
 }
 
-function clickProject() {
+function clickProject(Event) {
     for (indexClick = 0; indexClick < projectS.length; indexClick++) {
         projectS[indexClick].addEventListener('mousedown', function () {
             projectSelected = this.dataset.id
@@ -187,7 +189,7 @@ function clickProject() {
             });
 
             // Actions for each project
-            checkProject();
+            checkProject(Event);
         })
     }
 }
@@ -199,11 +201,11 @@ function giveIDtoProjects() {
     }
 }
 
-function dragProjects(event){
+function dragProjects(event) {
     var projectList = document.querySelector('.project-list');
 
-    projectList.addEventListener('mousedown', function(event){
-        if(mouseDown !== true){
+    projectList.addEventListener('mousedown', function (event) {
+        if (mouseDown !== true) {
             firstClick = event.pageX;
             firstScroll = window.scrollX;
         }
@@ -211,22 +213,22 @@ function dragProjects(event){
         console.log('start');
     });
 
-    projectList.addEventListener('mouseup', function(){
+    projectList.addEventListener('mouseup', function () {
         mouseDown = false;
         console.log('stop');
 
-        if(successScroll !== true){
+        if (successScroll !== true) {
             // Scroll
             document.body.scroll({
-                left: ((projectWidth) + (projectMargin / 2)) * (projectSelected-1),
+                left: ((projectWidth) + (projectMargin / 2)) * (projectSelected - 1),
                 behavior: 'smooth'
             });
         }
         successScroll = false;
     });
 
-    projectList.addEventListener('mousemove', function(event){
-        if(mouseDown == true){
+    projectList.addEventListener('mousemove', function (event) {
+        if (mouseDown == true) {
             lastClick = event.pageX;
             lastScroll = window.scrollX;
             var clickDifference = -((lastClick - firstClick));
@@ -238,58 +240,58 @@ function dragProjects(event){
 
             console.log(lastScroll - firstScroll);
 
-            if(lastScroll > firstScroll+300){
+            if (lastScroll > firstScroll + 300) {
                 projectSelected++
                 console.log("project Selected : " + projectSelected);
                 // Scroll
                 document.body.scroll({
-                    left: ((projectWidth) + (projectMargin / 2)) * (projectSelected-1),
+                    left: ((projectWidth) + (projectMargin / 2)) * (projectSelected - 1),
                     behavior: 'smooth'
                 });
                 mouseDown = false;
                 successScroll = true;
-                checkProject();
+                checkProject(Event);
 
-            } else if(lastScroll <= firstScroll-300){
+            } else if (lastScroll <= firstScroll - 300) {
                 projectSelected--
                 console.log("project Selected : " + projectSelected);
                 // Scroll
                 document.body.scroll({
-                    left: ((projectWidth) + (projectMargin / 2)) * (projectSelected-1),
+                    left: ((projectWidth) + (projectMargin / 2)) * (projectSelected - 1),
                     behavior: 'smooth'
                 });
                 mouseDown = false;
                 successScroll = true;
-                checkProject();
+                checkProject(Event);
             }
 
         }
     });
 }
 
-function keyProject(event){
+function keyProject(event) {
     var key = event.keyCode;
-    
-    if((key == 37 || key == 100 || key == 81) && projectSelected > 1){ // Left key 
+
+    if ((key == 37 || key == 100 || key == 81) && projectSelected > 1) { // Left key 
         projectSelected--
         console.log("project Selected : " + projectSelected);
         // Scroll to left
         document.body.scroll({
-            left: ((projectWidth) + (projectMargin / 2)) * (projectSelected-1),
+            left: ((projectWidth) + (projectMargin / 2)) * (projectSelected - 1),
             behavior: 'smooth'
         });
-        checkProject();
-    } else if ((key == 39 || key == 102 || key == 68) && projectSelected < projectS.length){ // Right key
+        checkProject(Event);
+    } else if ((key == 39 || key == 102 || key == 68) && projectSelected < projectS.length) { // Right key
         projectSelected++
         console.log("project Selected : " + projectSelected);
         // Scroll to right
         document.body.scroll({
-            left: ((projectWidth) + (projectMargin / 2)) * (projectSelected-1),
+            left: ((projectWidth) + (projectMargin / 2)) * (projectSelected - 1),
             behavior: 'smooth'
         });
-        checkProject();
+        checkProject(Event);
     }
-    
+
 }
 
 window.addEventListener('keydown', keyProject);
@@ -311,14 +313,14 @@ window.addEventListener('resize', resizing);
 
 // Start function (END)
 
-function startFunctions() {
+function startFunctions(Event) {
     resizing();
-    mouseWheelDetection();
+    mouseWheelDetection(Event);
     loaded();
     giveIDtoProjects();
-    checkProject();
-    clickProject();
-    dragProjects();
+    checkProject(Event);
+    clickProject(Event);
+    dragProjects(Event);
 }
 
 function loaded() {
@@ -327,4 +329,34 @@ function loaded() {
     })
 }
 
-startFunctions();
+startFunctions(Event);
+
+// Maybe one day ?
+
+//var followBtnS = document.querySelectorAll('.follow-btn');
+//
+//for (var i = 0; i < followBtnS.length; i++) {
+//    followBtnS[i].addEventListener('mouseover', function (Event) {
+//        this.style.transform = "";
+//
+//        this.addEventListener('mousemove', function(Event){
+//
+//            var cursorX = ((Event.pageX - this.offsetLeft)-(this.offsetWidth/2));
+//            var cursorY = ((Event.pageY - this.offsetTop)-(this.offsetHeight/2));
+//            var limit = 50;
+//
+//            if( (cursorX > -limit && cursorX < limit) && (cursorY > -limit && cursorY < limit) ){
+//                this.style.transform = "translateX(" + cursorX + "px) translateY(" + cursorY + "px)";
+//                this.style.transition = "0s";
+//            } else {
+//                this.style.transform = "";
+//                this.style.transition = "0.2s";
+//            }
+//
+//        })
+//
+//    })
+//    followBtnS[i].addEventListener('mouseout', function (Event) {
+//        this.style.transform = "";
+//    })
+//}
