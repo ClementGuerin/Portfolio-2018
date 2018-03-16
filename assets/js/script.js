@@ -301,7 +301,30 @@ window.addEventListener('keydown', keyProject);
 
 // START EXPERIMENTAL
 
+function createMenuLayer1(){
+    var block = document.createElement("DIV");
+    block.classList = "menu-block";
+    block.style.height = getRandomNumber(1, 10) + "px";
+    block.style.animationDuration = (getRandomNumber(10, 20)/10) + "s";
+    document.querySelector('.menu-layer-1').appendChild(block); 
+}
 
+function createMenuLayer2(){
+    var block = document.createElement("DIV");
+    block.classList = "menu-block";
+    block.style.height = getRandomNumber(1, 10) + "px";
+    block.style.animationDuration = (getRandomNumber(10, 20)/10) + "s";
+    document.querySelector('.menu-layer-2').appendChild(block); 
+}
+
+function startMenu(){
+    document.querySelector('.menu').style.display = "block";
+    
+    for(var i = 0; i < 200; i++){
+        createMenuLayer1();
+        createMenuLayer2();
+    }
+}
 
 
 // END EXPERIMENTAL
