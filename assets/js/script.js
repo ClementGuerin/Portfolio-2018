@@ -304,7 +304,7 @@ window.addEventListener('keydown', keyProject);
 function createMenuLayer1(){
     var block = document.createElement("DIV");
     block.classList = "menu-block";
-    block.style.height = getRandomNumber(1, 10) + "px";
+    block.style.height = getRandomNumber(5, 15) + "px";
     block.style.animationDuration = (getRandomNumber(10, 20)/10) + "s";
     document.querySelector('.menu-layer-1').appendChild(block); 
 }
@@ -312,18 +312,77 @@ function createMenuLayer1(){
 function createMenuLayer2(){
     var block = document.createElement("DIV");
     block.classList = "menu-block";
-    block.style.height = getRandomNumber(1, 10) + "px";
+    block.style.height = getRandomNumber(5, 15) + "px";
     block.style.animationDuration = (getRandomNumber(10, 20)/10) + "s";
     document.querySelector('.menu-layer-2').appendChild(block); 
 }
 
+function deleteMenuLayers(){
+    var layer1 = document.querySelectorAll('.menu-layer-1 > div');
+    var layer2 = document.querySelectorAll('.menu-layer-2 > div');
+    
+    for(var i = 0; i < layer1.length; i++){
+        layer1[i].remove();
+    }
+    
+    for(var i = 0; i < layer2.length; i++){
+        layer2[i].remove();
+    }
+}
+
 function startMenu(){
     document.querySelector('.menu').style.display = "block";
+    // Menu btn
+    document.querySelector('.btn-menu').classList.add('btn-off');
+    document.querySelector('.btn-menu').classList.remove('btn-on');
+    
+    var wait = setTimeout(function(){
+        // Menu close btn
+        document.querySelector('.btn-close').style.display = "block";
+    }, 350)
+    
+    var waitagain = setTimeout(function(){
+        // Menu btn
+        document.querySelector('.btn-menu').style.display = "none";
+        // Menu close btn
+        document.querySelector('.btn-close').classList.remove('btn-off');
+        document.querySelector('.btn-close').classList.add('btn-on');
+    }, 2100)
     
     for(var i = 0; i < 200; i++){
         createMenuLayer1();
-        createMenuLayer2();
+        var wait = setTimeout(createMenuLayer2, 350);
     }
+    
+    document.querySelector('.menu-layer-1').classList.remove('menu-close');
+    document.querySelector('.menu-layer-2').classList.remove('menu-close');
+    document.querySelector('.menu-layer-2').classList.add('menu-open');
+    document.querySelector('.menu-layer-1').classList.add('menu-open');
+}
+
+function closeMenu(){
+    // Menu close btn
+    document.querySelector('.btn-close').classList.add('btn-off');
+    document.querySelector('.btn-close').classList.remove('btn-on');
+    
+    // Layers Animation
+    document.querySelector('.menu-layer-1').classList.remove('menu-open');
+    document.querySelector('.menu-layer-2').classList.remove('menu-open');
+    document.querySelector('.menu-layer-2').classList.add('menu-close');
+    var wait = setTimeout(function(){
+        document.querySelector('.menu-layer-1').classList.add('menu-close');
+        // Menu btn
+        document.querySelector('.btn-menu').style.display = "block";
+    }, 350);
+    var waitagain = setTimeout(function(){
+        deleteMenuLayers();
+        document.querySelector('.menu').style.display = "none";
+        // Menu btn
+        document.querySelector('.btn-menu').classList.remove('btn-off');
+        document.querySelector('.btn-menu').classList.add('btn-on');
+        // Close menu btn
+        document.querySelector('.btn-close').style.display = "none";
+    }, 2800)
 }
 
 

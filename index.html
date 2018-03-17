@@ -43,16 +43,20 @@
     </div>
     
     <div class="follow-btn follow-btn-menu">
-        <div class="btn-menu" onclick="startMenu();">
+        <div class="btn-menu btn-on" onclick="startMenu();">
             <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="btn-close btn-off" onclick="closeMenu();" style="display: none">
             <span></span>
             <span></span>
         </div>
     </div>
     
     <section class="menu">
-        <div class="menu-layer-2"></div>
-        <div class="menu-layer-1"></div>
+        <div class="menu-layer-2 menu-open"></div>
+        <div class="menu-layer-1 menu-open"></div>
     </section>
     
     <script src="assets/js/script.js"></script>

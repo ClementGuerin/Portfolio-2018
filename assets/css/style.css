@@ -160,18 +160,16 @@ body{
 .menu-layer-1 > .menu-block{
     width: 100%;
     background: #fff;
-    animation: menuBlockLayer1On;
     height: 100px;
 }
 
 .menu-layer-2 > .menu-block{
     width: 100%;
-    background: #000;
-    animation: menuBlockLayer2On;
+    background: #101010;
     height: 100px;
 }
 
-@keyframes menuBlockLayer1On{
+@keyframes menuAnimationOpen{
     0%{
         width: 0%;
     }
@@ -180,14 +178,79 @@ body{
     }
 }
 
-@keyframes menuBlockLayer2On{
+.menu-open{
+    transform: rotateY(0deg);
+}
+
+.menu-open > div{
+    animation: menuAnimationOpen;
+}
+
+.menu-close{
+    transform: rotateY(180deg);
+}
+
+.menu-close > div{
+    width: 0%;
+    animation: menuAnimationClose;
+    opacity: 0;
+}
+
+@keyframes menuAnimationClose{
     0%{
-        width: 0%;
-    }
-    50%{
-        width: 0%;
+        display: block;
+        width: 100%;
+        opacity: 1;
     }
     100%{
-        width: 100%;
+        display: block;
+        width: 0%;
+        opacity: 1;
     }
+}
+
+.btn-on{
+    transform: rotateY(0deg);
+    backface-visibility: visible;
+}
+
+.btn-off{
+    transform: rotateY(90deg);
+    backface-visibility: hidden;
+}
+
+.btn-close{
+    align-self: center;
+    transition: 0.2s;
+    position: relative;
+    height: 28px;
+    width: 28px;
+}
+
+.btn-close:hover{
+    transform: scale(1.1);
+}
+
+.btn-close:hover > span{
+    background: #fff !important;
+}
+
+.btn-close > span{
+    width: 28px;
+    height: 2px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 3px;
+    display: block;
+    transition: 0.2s;
+    position: relative;
+    top: 16px;
+}
+
+.btn-close > span:first-child{
+    transform: rotate(45deg);
+}
+
+.btn-close > span:last-child{
+    transform: rotate(-45deg);
+    margin-top: -2px;
 }
