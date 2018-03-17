@@ -339,6 +339,13 @@ function startMenu(){
         document.querySelector('.btn-close').style.display = "block";
     }, 350)
     
+    var waitmore = setTimeout(function(){
+        // Menu list
+        document.querySelector('.menu-list').classList.remove('hide');
+        document.querySelector('.menu-list').classList.add('menuAnimationOn');
+        document.querySelector('.menu-list').classList.remove('menuAnimationOff');
+    }, 900)
+    
     var waitagain = setTimeout(function(){
         // Menu btn
         document.querySelector('.btn-menu').style.display = "none";
@@ -363,6 +370,10 @@ function closeMenu(){
     document.querySelector('.btn-close').classList.add('btn-off');
     document.querySelector('.btn-close').classList.remove('btn-on');
     
+    // Menu List
+    document.querySelector('.menu-list').classList.remove('menuAnimationOn');
+    document.querySelector('.menu-list').classList.add('menuAnimationOff');
+    
     // Layers Animation
     document.querySelector('.menu-layer-1').classList.remove('menu-open');
     document.querySelector('.menu-layer-2').classList.remove('menu-open');
@@ -380,6 +391,8 @@ function closeMenu(){
         document.querySelector('.btn-menu').classList.add('btn-on');
         // Close menu btn
         document.querySelector('.btn-close').style.display = "none";
+        // Menu list
+        document.querySelector('.menu-list').classList.add('hide');
     }, 2800)
 }
 

@@ -34,6 +34,7 @@ body{
     color: #fff;
     font-family: 'Raleway Regular', sans-serif;
     overflow: hidden;
+    counter-reset: menu;
 }
 
 .project-list{
@@ -257,4 +258,79 @@ body{
 .btn-close > span:last-child{
     transform: rotate(-45deg);
     margin-top: -2px;
+}
+
+.menu-list{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    position: fixed;
+    z-index: 7;
+}
+
+.menu-list > ul{
+    align-self: center;
+    display: block;
+    width: 100%;
+}
+
+.menu-list > ul > li > a{
+    text-decoration: none;
+    color: #fff;
+    opacity: 0.2;
+    transition: 0.35s;
+}
+
+.menu-list > ul > li {
+    font-size: 92px;
+    font-family: 'Raleway Bold';
+    margin: 50px 0;
+    transform: rotateX(0deg);
+}
+
+.menu-list > ul > li > a:hover{
+    opacity: 1;
+}
+
+.menu-list > ul > li > a::before{
+    counter-increment: menu;
+    content: counter(menu);
+    font-family: 'Raleway Regular';
+    font-size: 18px;
+    margin-right: 20px;
+    vertical-align: text-top;
+}
+
+@keyframes rotateMenuOn{
+    0%{
+        transform: rotateX(90deg);
+    }
+    100%{
+        transform: rotateX(0deg);
+    }
+}
+
+@keyframes rotateMenuOff{
+    0%{
+        transform: rotateX(0deg);
+        display: flex;
+    }
+    100%{
+        transform: rotateX(-90deg);
+        display: flex;
+    }
+}
+
+.hide{
+    display: none;
+}
+
+.menuAnimationOn > ul > li{
+    animation: rotateMenuOn 0.5s linear;
+}
+
+.menuAnimationOff > ul > li{
+    animation: rotateMenuOff 0.5s linear;
+    transform: rotateX(-90deg);
 }
