@@ -219,6 +219,10 @@ body{
     backface-visibility: hidden;
 }
 
+.btn-off:hover{
+    pointer-events: none;
+}
+
 .btn-close{
     align-self: center;
     transition: 0.2s;
