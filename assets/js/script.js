@@ -171,8 +171,6 @@ function checkProject(Event) { // I know, it's bad :(
         projectS[2].classList.remove('project-selected');
         projectS[3].classList.remove('project-selected');
 
-    } else {
-        alert("Oopsy, Edit checkProject function bro.");
     }
 }
 
