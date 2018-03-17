@@ -334,3 +334,42 @@ body{
     animation: rotateMenuOff 0.5s linear;
     transform: rotateX(-90deg);
 }
+
+.counter-projects{
+    position: fixed;
+    left: 50;
+    bottom: 50px;
+}
+
+.counter-projects > .counter{
+    color: #fff;
+    font-family: 'Raleway Regular';
+    font-size: 16px;
+}
+
+.counter-projects > .counter > .separation{
+    height: 35px;
+    width: 1px;
+    background: #fff;
+    display: inline-block;
+    transform: rotate(22.5deg);
+    position: relative;
+    left: 0px;
+    top: 15px;
+    opacity: 0.4;
+}
+
+.counter-projects > .counter > .current-project{
+    position: relative;
+    top: -6px;
+    left: -2px;
+    width: 10px;
+    display: inline-block;
+}
+
+.counter-projects > .counter > .total-project{
+    position: relative;
+    top: 10px;
+    left: 4px;
+    opacity: 0.4;
+}

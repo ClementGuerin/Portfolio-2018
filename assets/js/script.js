@@ -172,6 +172,7 @@ function checkProject(Event) { // I know, it's bad :(
         projectS[3].classList.remove('project-selected');
 
     }
+    counterProjects();
 }
 
 function clickProject(Event) {
@@ -294,10 +295,7 @@ function keyProject(event) {
 
 window.addEventListener('keydown', keyProject);
 
-
-// ************************************************************************** //
-
-// START EXPERIMENTAL
+// Menu page
 
 function createMenuLayer1(){
     var block = document.createElement("DIV");
@@ -396,6 +394,15 @@ function closeMenu(){
     }, 2800)
 }
 
+// ************************************************************************** //
+
+// START EXPERIMENTAL
+
+
+function counterProjects(){
+    document.querySelector('.current-project').textContent = projectSelected;
+    document.querySelector('.total-project').textContent = projectS.length;
+}
 
 // END EXPERIMENTAL
 
