@@ -96,8 +96,8 @@ function previousProject(Event) {
             console.log("project Selected : " + projectSelected);
 
             // Scroll
-            document.body.scrollBy({
-                left: -((projectWidth) + (projectMargin / 2)),
+            document.body.scroll({
+                left: ((projectWidth) + (projectMargin / 2)) * (projectSelected - 1),
                 behavior: 'smooth'
             });
 
@@ -121,8 +121,8 @@ function nextProject(Event) {
             console.log("project Selected : " + projectSelected);
 
             // Scroll
-            document.body.scrollBy({
-                left: projectWidth + (projectMargin / 2),
+            document.body.scroll({
+                left: ((projectWidth) + (projectMargin / 2)) * (projectSelected - 1),
                 behavior: 'smooth'
             });
 
