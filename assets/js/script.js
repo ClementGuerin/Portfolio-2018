@@ -414,24 +414,67 @@ function callProject(){
     var projectPage = document.createElement("DIV");
     projectPage.classList = "page-project";
     var projectPageTitle = document.createElement("H1");
-    var projectPageType = document.createElement("SPAN");
-    var projectPageClient = document.createElement("SPAN");
+    var projectPageType = document.createElement("LI");
+    var projectPageClient = document.createElement("LI");
     var projectPageDescription = document.createElement("P");
+    var projectPageInfos = document.createElement("DIV");
+    var projectPageGallery = document.createElement("DIV");
+    var projectPageList = document.createElement("UL");
+    var projectPageBack = document.createElement("SPAN");
     
     projectPageTitle.innerHTML = dataProjects[(projectSelected-1)].title;
     projectPageType.innerHTML = dataProjects[(projectSelected-1)].type;
     projectPageClient.innerHTML = dataProjects[(projectSelected-1)].client;
     projectPageDescription.innerHTML = dataProjects[(projectSelected-1)].description;
+    projectPageBack.innerHTML = 'Back to Home';
+    
+    // CSS Elements
+    projectPage.style.paddingLeft = projectMargin;
+    projectPage.style.paddingRight = projectMargin;
+    projectPageDescription.classList = "description";
+    projectPageInfos.classList = "infos";
+    projectPageType.classList = "type";
+    projectPageClient.classList = "client";
+    projectPageGallery.classList = "gallery";
+    projectPageBack.classList = "back";
+    
+    // Show Gallery
+    
+    var gallery = dataProjects[(projectSelected-1)].gallery;
+    
+    for(var i = 0; i < gallery.length; i++){
+        projectPageGallery.innerHTML = projectPageGallery.innerHTML + '<img src="' + gallery[i] + '" alt="' + dataProjects[(projectSelected-1)].title + '">';
+    }
     
     // Hide Homepage
     hideHomepage();
     
     // Create page
     projectPage.appendChild(projectPageTitle);
-    projectPage.appendChild(projectPageType);
-    projectPage.appendChild(projectPageClient);
-    projectPage.appendChild(projectPageDescription);
+    projectPageInfos.appendChild(projectPageDescription);
+    projectPageList.appendChild(projectPageType);
+    projectPageList.appendChild(projectPageClient);
+    projectPageInfos.appendChild(projectPageList);
+    projectPage.appendChild(projectPageInfos);
+    projectPage.appendChild(projectPageGallery);
+    projectPage.appendChild(projectPageBack);
     document.querySelector('body').appendChild(projectPage);
+    
+    // Close page
+    projectPageBack.addEventListener('click', closeProject);
+    
+    // Overflow Body
+    document.body.style.overflow = "auto";
+}
+
+function closeProject(){
+    document.querySelector('.page-project').remove();
+    
+    // Overflow Body
+    document.body.style.overflow = "";
+    
+    // Show Homepage
+    showHomepage();
 }
 
 function hideHomepage(){
@@ -447,6 +490,23 @@ function hideHomepage(){
     var wait = setTimeout(function(){
         for(var i = 0; i < homepage.length; i++){
             homepage[i].style.display = "none";
+        }
+    },500)
+}
+
+function showHomepage(){
+    var homepage = document.querySelectorAll('.homepage');
+
+    for(var i = 0; i < homepage.length; i++){
+
+        element = homepage[i];
+
+        homepage[i].classList.remove('hide-homepage');
+    }
+
+    var wait = setTimeout(function(){
+        for(var i = 0; i < homepage.length; i++){
+            homepage[i].style.display = "";
         }
     },500)
 }

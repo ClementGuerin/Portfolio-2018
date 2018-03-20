@@ -396,8 +396,74 @@ body{
 }
 
 .page-project{
-    position: fixed;
+    position: relative;
     left: 0;
     top: 0;
     z-index: -1;
+}
+
+.page-project > h1{
+    font-size: 3.4em;
+    color: #fff;
+    font-family: 'Raleway Bold';
+    align-self: center;
+    position: relative;
+    margin-top: 200px;
+}
+
+.page-project > .infos{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.page-project > .infos > .description{
+    max-width: 70%;
+    font-size: 14px;
+}
+
+.page-project > .infos > ul{
+    padding: 0px 50px;
+    font-family: 'Raleway Bold';
+    font-size: 15px;
+}
+
+.page-project > .infos > ul > li{
+    margin-bottom: 20px;
+}
+
+.page-project > .infos > ul > li::before{
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-bottom: 8px;
+    font-size: 12px;
+    font-family: 'Raleway Regular';
+}
+
+.page-project > .infos > ul > .type::before{
+    content: 'Type';
+}
+
+
+.page-project > .infos > ul > .client::before{
+    content: 'Client';
+}
+
+.page-project > .back{
+    position: fixed;
+    left: 50px;
+    top: 50px;
+    font-size: 12px;
+    cursor: default;
+}
+
+.page-project > .back::before{
+    content: '←';
+    padding-right: 8px;
+}
+
+.page-project > .gallery > img{
+    max-width: 100%;
+    margin-top: 60px;
 }
