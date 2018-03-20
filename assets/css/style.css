@@ -300,6 +300,7 @@ body{
     font-size: 18px;
     margin-right: 20px;
     vertical-align: text-top;
+/*    display: none;*/
 }
 
 @keyframes rotateMenuOn{
@@ -337,14 +338,17 @@ body{
 
 .counter-projects{
     position: fixed;
-    left: 50;
+    width: 100%;
+    text-align: center;
     bottom: 50px;
+    left: 0;
 }
 
 .counter-projects > .counter{
     color: #fff;
     font-family: 'Raleway Regular';
     font-size: 16px;
+    display: inline-block;
 }
 
 .counter-projects > .counter > .separation{
@@ -372,4 +376,28 @@ body{
     top: 10px;
     left: 4px;
     opacity: 0.4;
+}
+
+.hide-homepage{
+    animation: hideHomepage 0.5s;
+    opacity: 0;
+    margin-top: -100px;
+}
+
+@keyframes hideHomepage{
+    0%{
+        opacity: 1;
+        margin-top: 0;
+    }
+    100%{
+        opacity: 0;
+        margin-top: -100px;
+    }
+}
+
+.page-project{
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: -1;
 }

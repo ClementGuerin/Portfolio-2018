@@ -176,8 +176,13 @@ function checkProject(Event) { // I know, it's bad :(
 }
 
 function clickProject(Event) {
+    
     for (indexClick = 0; indexClick < projectS.length; indexClick++) {
         projectS[indexClick].addEventListener('mousedown', function () {
+            if(projectSelected == this.dataset.id){
+                callProject();
+            }
+            
             projectSelected = this.dataset.id
             console.log("project Selected : " + projectSelected);
 
@@ -295,6 +300,11 @@ function keyProject(event) {
 
 window.addEventListener('keydown', keyProject);
 
+function counterProjects(){
+    document.querySelector('.current-project').textContent = projectSelected;
+    document.querySelector('.total-project').textContent = projectS.length;
+}
+
 // Menu page
 
 function createMenuLayer1(){
@@ -399,10 +409,48 @@ function closeMenu(){
 // START EXPERIMENTAL
 
 
-function counterProjects(){
-    document.querySelector('.current-project').textContent = projectSelected;
-    document.querySelector('.total-project').textContent = projectS.length;
+function callProject(){
+    // Init Elements
+    var projectPage = document.createElement("DIV");
+    projectPage.classList = "page-project";
+    var projectPageTitle = document.createElement("H1");
+    var projectPageType = document.createElement("SPAN");
+    var projectPageClient = document.createElement("SPAN");
+    var projectPageDescription = document.createElement("P");
+    
+    projectPageTitle.innerHTML = dataProjects[(projectSelected-1)].title;
+    projectPageType.innerHTML = dataProjects[(projectSelected-1)].type;
+    projectPageClient.innerHTML = dataProjects[(projectSelected-1)].client;
+    projectPageDescription.innerHTML = dataProjects[(projectSelected-1)].description;
+    
+    // Hide Homepage
+    hideHomepage();
+    
+    // Create page
+    projectPage.appendChild(projectPageTitle);
+    projectPage.appendChild(projectPageType);
+    projectPage.appendChild(projectPageClient);
+    projectPage.appendChild(projectPageDescription);
+    document.querySelector('body').appendChild(projectPage);
 }
+
+function hideHomepage(){
+    var homepage = document.querySelectorAll('.homepage');
+    
+    for(var i = 0; i < homepage.length; i++){
+        
+        element = homepage[i];
+        
+        homepage[i].classList.add('hide-homepage');
+    }
+    
+    var wait = setTimeout(function(){
+        for(var i = 0; i < homepage.length; i++){
+            homepage[i].style.display = "none";
+        }
+    },500)
+}
+
 
 // END EXPERIMENTAL
 
