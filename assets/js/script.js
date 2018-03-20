@@ -83,6 +83,7 @@ function resetScroll() {
 function resizing() {
     getHeightWidthScreen();
     changeProjectSize();
+    console.log('Resizing!')
 }
 
 // Projects display
@@ -464,14 +465,13 @@ function callProject(){
     projectPageBack.addEventListener('click', closeProject);
     
     // Overflow Body
-    document.body.style.overflow = "auto";
+    document.body.style.overflowY = "auto";
 }
 
 function closeProject(){
-    document.querySelector('.page-project').remove();
-    
-    // Overflow Body
-    document.body.style.overflow = "";
+    var wait = setTimeout(function(){
+        document.querySelector('.page-project').remove();
+    }, 500)
     
     // Show Homepage
     showHomepage();
@@ -484,6 +484,7 @@ function hideHomepage(){
         
         element = homepage[i];
         
+        homepage[i].classList.remove('show-homepage');
         homepage[i].classList.add('hide-homepage');
     }
     
@@ -496,21 +497,35 @@ function hideHomepage(){
 
 function showHomepage(){
     var homepage = document.querySelectorAll('.homepage');
+    
+    // Clear Project list
+    clearProjects();
+    
+    // CSS Animation
+    document.querySelector('.page-project').classList.add('page-project-hide');
 
     for(var i = 0; i < homepage.length; i++){
 
         element = homepage[i];
 
         homepage[i].classList.remove('hide-homepage');
+        homepage[i].classList.add('show-homepage');
     }
 
     var wait = setTimeout(function(){
         for(var i = 0; i < homepage.length; i++){
             homepage[i].style.display = "";
+            
+            // Overflow Body
+            document.body.style.overflow = "";
         }
     },500)
 }
 
+function clearProjects(){
+    projectSelected = 1;
+    checkProject();
+}
 
 // END EXPERIMENTAL
 

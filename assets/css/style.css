@@ -137,6 +137,7 @@ body{
     width: 100%;
     height: 100%;
     display: none;
+    z-index: 1;
 }
 
 .menu-layer-1{
@@ -395,11 +396,44 @@ body{
     }
 }
 
+.show-homepage{
+    animation: showHomepage 0.5s;
+    opacity: 1;
+    margin-top: 0px;
+}
+
+@keyframes showHomepage{
+    0%{
+        opacity: 0;
+        margin-top: -100px;
+    }
+    100%{
+        opacity: 1;
+        margin-top: -0px;
+    }
+}
+
 .page-project{
     position: relative;
     left: 0;
     top: 0;
-    z-index: -1;
+    animation: pageProjectOn 1.5s;
+    margin-bottom: 100px;
+}
+
+@keyframes pageProjectOn{
+    0%{
+        opacity: 0;
+        top: 100px;
+    }
+    30%{
+        opacity: 0;
+        top: 100px;
+    }
+    100%{
+        opacity: 1;
+        top: 0;
+    }
 }
 
 .page-project > h1{
@@ -465,5 +499,19 @@ body{
 
 .page-project > .gallery > img{
     max-width: 100%;
-    margin-top: 60px;
+    margin-top: 80px;
+}
+
+.page-project-hide{
+    animation: pageProjectHide 0.5s;
+    opacity: 0;
+}
+
+@keyframes pageProjectHide{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
 }
