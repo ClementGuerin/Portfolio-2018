@@ -523,3 +523,7 @@ body{
 .page > .page-about, .page .page-contact{
     display: none;
 }
+
+.page-about-close, .page-contact-close{
+    display: none;
+}

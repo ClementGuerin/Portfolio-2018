@@ -83,6 +83,8 @@ function resetScroll() {
 function resizing() {
     getHeightWidthScreen();
     changeProjectSize();
+    document.querySelector('.page').style.paddingLeft = projectMargin + "px";
+    document.querySelector('.page').style.paddingRight = projectMargin + "px";
     console.log('Resizing!')
 }
 
@@ -523,7 +525,9 @@ function showHomepage(){
     clearProjects();
     
     // CSS Animation
-    document.querySelector('.page-project').classList.add('page-project-hide');
+    if(document.querySelector('.page-project') !== null){
+        document.querySelector('.page-project').classList.add('page-project-hide');    
+    }
 
     for(var i = 0; i < homepage.length; i++){
 
@@ -555,6 +559,7 @@ function clearProjects(){
 document.querySelector('#home').addEventListener('click', function(){
     closeProject();
     hideAbout();
+    hideContact();
     clearProjects();
     closeMenu();
     var wait = setTimeout(function(){
@@ -567,6 +572,7 @@ document.querySelector('#about').addEventListener('click', function(){
     closeProject();
     clearProjects();
     hideHomepage();
+    hideContact();
     closeMenu();
     showAbout();
     var wait = setTimeout(function(){
@@ -592,11 +598,51 @@ function hideAbout(){
         document.querySelector('.page-about').classList.remove('page-about-open');
         document.querySelector('.page-about').classList.add('page-about-close');
         
-        var wait = setTimeout(function(){
-            // Hide page
+        
+        // Hide page
+        if(document.querySelector('.page-contact-open') == null){
+           document.querySelector('.page').style.display = "";
+        }
+        document.querySelector('.page-about').style.display = "";          
+    }
+}
+
+document.querySelector('#contact').addEventListener('click', function(){
+    closeProject();
+    clearProjects();
+    hideHomepage();
+    hideAbout();
+    closeMenu();
+    showContact();
+    var wait = setTimeout(function(){
+        // Menu btn
+        document.querySelector('.btn-menu').style.display = "block";
+    }, 1000);
+});
+
+function showContact(){
+    // Show page
+    document.querySelector('.page').style.display = "block";
+    document.querySelector('.page-contact').style.display = "block";
+
+    // Add/Remove class
+    document.querySelector('.page-contact').classList.remove('page-contact-close');
+    document.querySelector('.page-contact').classList.add('page-contact-open');
+}
+
+function hideContact(){
+    if(document.querySelector('.page-contact-close') == null){
+
+        // Add/Remove class
+        document.querySelector('.page-contact').classList.remove('page-contact-open');
+        document.querySelector('.page-contact').classList.add('page-contact-close');
+
+    
+        // Hide page
+        if(document.querySelector('.page-about-open') == null){
             document.querySelector('.page').style.display = "";
-            document.querySelector('.page-about').style.display = "";
-        }, 500)
+        }
+        document.querySelector('.page-contact').style.display = "";
     }
 }
 
