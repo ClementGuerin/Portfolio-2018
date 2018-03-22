@@ -515,3 +515,11 @@ body{
         opacity: 0;
     }
 }
+
+.page{
+    display: none;
+}
+
+.page > .page-about, .page .page-contact{
+    display: none;
+}

@@ -6,7 +6,7 @@ var mouseWheel, lastMouseWheel;
 var projectMargin, projectWidth, projectHeight;
 var projectSelected = 1;
 var projectClicked;
-var projectS = document.querySelectorAll('.project'); // Use in multiples functions
+var projectS; // Use in multiples functions
 var projectListWidth = document.querySelector('.project-list').offsetWidth;
 var noRepeat = false;
 var indexClick;
@@ -84,6 +84,25 @@ function resizing() {
     getHeightWidthScreen();
     changeProjectSize();
     console.log('Resizing!')
+}
+
+// Create projects
+
+function createProjects(){
+    for(var i = 0; i < dataProjects.length; i++){
+        var newproject = document.createElement("div");
+        newproject.classList = "project";
+        var newtitle = document.createElement("H1");
+        newtitle.classList = "project-title";
+        newtitle.innerHTML = dataProjects[i].title;
+        newtitle.setAttribute('title', dataProjects[i].type);
+        newproject.appendChild(newtitle);
+        document.querySelector('.project-list').appendChild(newproject);
+        
+        // Init projectS
+        projectS = document.querySelectorAll('.project');
+    }
+    
 }
 
 // Projects display
@@ -179,7 +198,7 @@ function checkProject(Event) { // I know, it's bad :(
 function clickProject(Event) {
     
     for (indexClick = 0; indexClick < projectS.length; indexClick++) {
-        projectS[indexClick].addEventListener('mousedown', function () {
+        projectS[indexClick].addEventListener('mouseup', function () {
             if(projectSelected == this.dataset.id){
                 callProject();
             }
@@ -405,76 +424,78 @@ function closeMenu(){
     }, 2800)
 }
 
-// ************************************************************************** //
-
-// START EXPERIMENTAL
-
-
 function callProject(){
-    // Init Elements
-    var projectPage = document.createElement("DIV");
-    projectPage.classList = "page-project";
-    var projectPageTitle = document.createElement("H1");
-    var projectPageType = document.createElement("LI");
-    var projectPageClient = document.createElement("LI");
-    var projectPageDescription = document.createElement("P");
-    var projectPageInfos = document.createElement("DIV");
-    var projectPageGallery = document.createElement("DIV");
-    var projectPageList = document.createElement("UL");
-    var projectPageBack = document.createElement("SPAN");
+    if(document.querySelector('.page-project') == null){        
     
-    projectPageTitle.innerHTML = dataProjects[(projectSelected-1)].title;
-    projectPageType.innerHTML = dataProjects[(projectSelected-1)].type;
-    projectPageClient.innerHTML = dataProjects[(projectSelected-1)].client;
-    projectPageDescription.innerHTML = dataProjects[(projectSelected-1)].description;
-    projectPageBack.innerHTML = 'Back to Home';
-    
-    // CSS Elements
-    projectPage.style.paddingLeft = projectMargin;
-    projectPage.style.paddingRight = projectMargin;
-    projectPageDescription.classList = "description";
-    projectPageInfos.classList = "infos";
-    projectPageType.classList = "type";
-    projectPageClient.classList = "client";
-    projectPageGallery.classList = "gallery";
-    projectPageBack.classList = "back";
-    
-    // Show Gallery
-    
-    var gallery = dataProjects[(projectSelected-1)].gallery;
-    
-    for(var i = 0; i < gallery.length; i++){
-        projectPageGallery.innerHTML = projectPageGallery.innerHTML + '<img src="' + gallery[i] + '" alt="' + dataProjects[(projectSelected-1)].title + '">';
+        // Init Elements
+        var projectPage = document.createElement("DIV");
+        projectPage.classList = "page-project";
+        var projectPageTitle = document.createElement("H1");
+        var projectPageType = document.createElement("LI");
+        var projectPageClient = document.createElement("LI");
+        var projectPageDescription = document.createElement("P");
+        var projectPageInfos = document.createElement("DIV");
+        var projectPageGallery = document.createElement("DIV");
+        var projectPageList = document.createElement("UL");
+        var projectPageBack = document.createElement("SPAN");
+
+        projectPageTitle.innerHTML = dataProjects[(projectSelected-1)].title;
+        projectPageType.innerHTML = dataProjects[(projectSelected-1)].type;
+        projectPageClient.innerHTML = dataProjects[(projectSelected-1)].client;
+        projectPageDescription.innerHTML = dataProjects[(projectSelected-1)].description;
+        projectPageBack.innerHTML = 'Back to Home';
+
+        // CSS Elements
+        projectPage.style.paddingLeft = projectMargin;
+        projectPage.style.paddingRight = projectMargin;
+        projectPageDescription.classList = "description";
+        projectPageInfos.classList = "infos";
+        projectPageType.classList = "type";
+        projectPageClient.classList = "client";
+        projectPageGallery.classList = "gallery";
+        projectPageBack.classList = "back";
+
+        // Show Gallery
+
+        var gallery = dataProjects[(projectSelected-1)].gallery;
+
+        for(var i = 0; i < gallery.length; i++){
+            projectPageGallery.innerHTML = projectPageGallery.innerHTML + '<img src="' + gallery[i] + '" alt="' + dataProjects[(projectSelected-1)].title + '">';
+        }
+
+        // Hide Homepage
+        hideHomepage();
+
+        // Create page
+        projectPage.appendChild(projectPageTitle);
+        projectPageInfos.appendChild(projectPageDescription);
+        projectPageList.appendChild(projectPageType);
+        projectPageList.appendChild(projectPageClient);
+        projectPageInfos.appendChild(projectPageList);
+        projectPage.appendChild(projectPageInfos);
+        projectPage.appendChild(projectPageGallery);
+        projectPage.appendChild(projectPageBack);
+        document.querySelector('body').appendChild(projectPage);
+
+        // Close page
+        projectPageBack.addEventListener('click', closeProject);
+
+        // Overflow Body
+        document.body.style.overflowY = "auto";
     }
-    
-    // Hide Homepage
-    hideHomepage();
-    
-    // Create page
-    projectPage.appendChild(projectPageTitle);
-    projectPageInfos.appendChild(projectPageDescription);
-    projectPageList.appendChild(projectPageType);
-    projectPageList.appendChild(projectPageClient);
-    projectPageInfos.appendChild(projectPageList);
-    projectPage.appendChild(projectPageInfos);
-    projectPage.appendChild(projectPageGallery);
-    projectPage.appendChild(projectPageBack);
-    document.querySelector('body').appendChild(projectPage);
-    
-    // Close page
-    projectPageBack.addEventListener('click', closeProject);
-    
-    // Overflow Body
-    document.body.style.overflowY = "auto";
 }
 
 function closeProject(){
     var wait = setTimeout(function(){
-        document.querySelector('.page-project').remove();
+        if(document.querySelector('.page-project') !== null){
+            document.querySelector('.page-project').remove();            
+        }
     }, 500)
     
     // Show Homepage
-    showHomepage();
+    if(document.querySelector('.show-homepage') == null){
+        showHomepage();        
+    }
 }
 
 function hideHomepage(){
@@ -527,6 +548,20 @@ function clearProjects(){
     checkProject();
 }
 
+// ************************************************************************** //
+
+// START EXPERIMENTAL
+
+document.querySelector('#home').addEventListener('click', function(){
+    closeProject();
+    clearProjects();
+    closeMenu();
+    var wait = setTimeout(function(){
+        // Menu btn
+        document.querySelector('.btn-menu').style.display = "block";
+    }, 1000);
+})
+
 // END EXPERIMENTAL
 
 // ************************************************************************** //
@@ -537,6 +572,7 @@ window.addEventListener('resize', resizing);
 // Start function (END)
 
 function startFunctions(Event) {
+    createProjects();
     resizing();
     mouseWheelDetection(Event);
     loaded();
