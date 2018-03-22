@@ -554,13 +554,51 @@ function clearProjects(){
 
 document.querySelector('#home').addEventListener('click', function(){
     closeProject();
+    hideAbout();
     clearProjects();
     closeMenu();
     var wait = setTimeout(function(){
         // Menu btn
         document.querySelector('.btn-menu').style.display = "block";
     }, 1000);
-})
+});
+
+document.querySelector('#about').addEventListener('click', function(){
+    closeProject();
+    clearProjects();
+    hideHomepage();
+    closeMenu();
+    showAbout();
+    var wait = setTimeout(function(){
+        // Menu btn
+        document.querySelector('.btn-menu').style.display = "block";
+    }, 1000);
+});
+
+function showAbout(){
+    // Show page
+    document.querySelector('.page').style.display = "block";
+    document.querySelector('.page-about').style.display = "block";
+    
+    // Add/Remove class
+    document.querySelector('.page-about').classList.remove('page-about-close');
+    document.querySelector('.page-about').classList.add('page-about-open');
+}
+
+function hideAbout(){
+    if(document.querySelector('.page-about-close') == null){
+        
+        // Add/Remove class
+        document.querySelector('.page-about').classList.remove('page-about-open');
+        document.querySelector('.page-about').classList.add('page-about-close');
+        
+        var wait = setTimeout(function(){
+            // Hide page
+            document.querySelector('.page').style.display = "";
+            document.querySelector('.page-about').style.display = "";
+        }, 500)
+    }
+}
 
 // END EXPERIMENTAL
 
