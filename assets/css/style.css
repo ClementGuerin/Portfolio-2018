@@ -52,6 +52,7 @@ body{
     transform: scale(0.8);
     transition: 0.3s;
     opacity: 0.5;
+    cursor: pointer;
 }
 
 .project-selected{
@@ -105,6 +106,7 @@ body{
     align-self: center;
     transition: 0.2s;
     position: relative;
+    cursor: pointer;
 }
 
 .btn-menu:hover{
@@ -231,6 +233,7 @@ body{
     position: relative;
     height: 28px;
     width: 28px;
+    cursor: pointer;
 }
 
 .btn-close:hover{
@@ -489,7 +492,7 @@ body{
     left: 50px;
     top: 50px;
     font-size: 12px;
-    cursor: default;
+    cursor: pointer;
 }
 
 .page-project > .back::before{
@@ -526,4 +529,125 @@ body{
 
 .page-about-close, .page-contact-close{
     display: none;
+}
+
+.page-about > h1{
+    font-size: 3.4em;
+    color: #fff;
+    font-family: 'Raleway Bold';
+    align-self: center;
+    position: relative;
+    margin-top: 200px;
+}
+
+.page-about > p{
+    margin: 30px 0px;
+    font-size: 14px;
+    font-family: 'Raleway Regular';
+}
+
+.page-about > ul, .page-about > ul > li{
+    display: inline;
+}
+
+.page-about > ul > li::after{
+    content: '•';
+    margin: 0px 10px;
+}
+
+.page-about > ul > li:last-child::after{
+    content: '';
+    margin: 0px;
+}
+
+.page-about > ul > li > a{
+    color: inherit;
+    text-decoration: none;
+    font-size: 13px;
+    opacity: 0.7;
+    transition: 0.25s;
+}
+
+.page-about > ul > li > a:hover{
+    opacity: 1;
+}
+
+.page-contact > form{
+    text-align: center;
+}
+
+.page-contact > form > input{
+    width: 100%;
+    min-height: 60px;
+    background: inherit;
+    border: 0;
+    border-bottom: solid 2px rgba(255,255,255,0.5);
+    font-family: 'Raleway Bold';
+    font-size: 16px;
+    padding: 10px 0px;
+    margin-bottom: 40px;
+    color: #fff;
+    caret-color: #fff;
+    outline:0;
+    transition: 0.25s;
+    text-align: left;
+}
+
+.page-contact > form > input:focus, .page-contact > form > textarea:focus{
+    border-bottom: solid 2px rgba(255,255,255,1);
+}
+
+.page-contact > form > input::placeholder, .page-contact > form > textarea::placeholder{
+    color: rgba(255,255,255,0.5);
+    transition: 0.25s;
+}
+
+.page-contact > form > input:focus::placeholder, .page-contact > form > textarea:focus::placeholder{
+    color: rgba(255,255,255,1);
+}
+
+.page-contact > form > textarea{
+    width: 100%;
+    background: inherit;
+    border: 0;
+    border-bottom: solid 2px rgba(255,255,255,0.5);
+    font-family: 'Raleway Bold';
+    font-size: 16px;
+    padding: 10px 0px;
+    margin-bottom: 40px;
+    color: #fff;
+    caret-color: #fff;
+    outline: 0;
+    transition: 0.25s;
+    resize: vertical;
+    text-align: left;
+}
+
+.page-contact > form > .submit{
+    width: auto;
+    background: #272727;
+    border-radius: 3px;
+    padding: 18px 42px;
+    color: #fff;
+    border: none;
+    font-family: 'Raleway Bold';
+    min-height: inherit;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.page-contact > form > .submit:hover{
+    background: #fff;
+    color: #272727;
+}
+
+.page-contact > h1{
+    font-size: 3.4em;
+    color: #fff;
+    font-family: 'Raleway Bold';
+    align-self: center;
+    position: relative;
+    margin-top: 200px;
+    margin-bottom: 60px;
 }
